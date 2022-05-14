@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+
+import * as React from "react"
+import { useSelector,TypedUseSelectorHook } from "react-redux"
+// import "./styles.css"
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+import { Records } from "./components/Records"
+import { Login } from "./components/StudentLogin"
+import { RootState } from './store/combine';
+export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+const App: React.FC = () => {
+
+
+  const { records, loading, error } = useTypedSelector((state) => state.records);
+  let data = Object.entries(records);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main>
+      <h1>Welcome !</h1>
+      <Login  />
+      <div>
+
+      {
+        loading ? (
+          <div>Loading...</div>
+        ) : (
+          data.map((res: any) => (
+            <Records
+              key={res[0]}
+              record={res}
+              // removeArticle={logout}
+            />
+          ))
+        )
+      }
+      </div>
+     
+    </main>
+  )
 }
 
-export default App;
+export default App
+
+

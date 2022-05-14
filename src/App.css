@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,110 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
 }
+
+body {
+  font-family: Nunito, sans-serif;
+  background: #f5f6f7;
+}
+
+main {
+  max-width: 40rem;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+main > h1 {
+  text-align: center;
+}
+
+.Add {
+  margin: 3rem auto;
+  padding: 1rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.Add input {
+  display: block;
+  margin: 1rem auto;
+  width: 20rem;
+  padding: 0.5rem;
+  border: 1px solid #00b8e6;
+  border-radius: 10px;
+  outline: none;
+}
+
+.Add button {
+  width: 20rem;
+  padding: 0.7rem;
+  border: 1px solid #00b8e6;
+  background: #00b8e6;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.Add button:hover {
+  background: #0093b8;
+}
+
+.Add button:disabled {
+  background: #d8d8d8;
+  border: 1px solid #d8d8d8;
+  cursor: not-allowed;
+}
+
+.Record {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  margin: 0.5rem;
+}
+
+.Record:not(:last-child) {
+  border-bottom: 2px solid #f5f6f7;
+}
+
+.Record h1 {
+  color: #222;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.Record p {
+  padding-right: 1rem;
+  color: #444;
+}
+.Record button {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #d34b4b;
+  background: #d34b4b;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.Record button:hover {
+  background: #e06a6a;
+}
+
