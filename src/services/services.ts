@@ -7,17 +7,24 @@ class Service {
         //fetch  students records  once logged in
         try {
             const response = await axios.get(`${API_URL}${'app8ZbcPx7dkpOnP0'}/${'tblIzakozsIHPiZnI'}?api_key=keyt8qodDNgSh8bve&filterByFormula=({Name} ="${param}")`);
-          // add student to a session
-            localStorage.setItem("user", param);
-            
-          //get data from response and parse them to get required records
-            let data = response.data
-            let records = data.records;
-            let record = records[0].fields;
-            // get classes records
 
-           // setTimeout(() => this.getClasses(record.Classes), 0)
-            return this.getClasses(record.Classes);
+
+
+            //get data from response and parse them to get required records
+            let data = response.data
+           // console.log(data)
+
+            let records = data.records;
+            if (records.length > 0) {
+                // add student to a session
+                localStorage.setItem("user", param);
+                let record = records[0].fields;
+                // get classes records
+                return this.getClasses(record.Classes);
+            } else {
+                return {}
+
+            }
         } catch (error) {
             console.error(error);
         }
@@ -29,7 +36,7 @@ class Service {
         //fetch  classes records  once logged in
         try {
             const response = await axios.get(`${API_URL}${'app8ZbcPx7dkpOnP0'}/${'tblgh8YARZPqeJF07'}?api_key=keyt8qodDNgSh8bve&filterByFormula=SEARCH(RECORD_ID(), "${queryString1}") != ""`);
-          
+
             //get data from response and parse them to get required records
             let data = response.data
             let records = data.records;
@@ -48,7 +55,7 @@ class Service {
 
             });
 
-             // get Students records
+            // get Students records
             return this.getStudents(students)
 
         } catch (error) {
@@ -59,7 +66,7 @@ class Service {
 
     async getStudents(record: any) {
         //console.log(record)
-     /// prepare data classes records to get student data
+        /// prepare data classes records to get student data
         let arr: any = []
         record.forEach((e: any) => {
             //console.log(e)
@@ -83,14 +90,14 @@ class Service {
             arr2.push(students)
 
         });
-       // get query search params
+        // get query search params
         var queryString = Object.keys(arr2).map((key: any) => arr2[key]).join(',');
-       
+
 
         //fetch  students records by ids once logged in
         try {
             const response = await axios.get(`${API_URL}${'app8ZbcPx7dkpOnP0'}/${'tblIzakozsIHPiZnI'}?api_key=keyt8qodDNgSh8bve&filterByFormula=SEARCH(RECORD_ID(), "${queryString}") != ""`);
-        //get data from response and parse them to get required records
+            //get data from response and parse them to get required records
             let data = response.data
             let records = data.records;
             let student: any[] = []
@@ -102,7 +109,7 @@ class Service {
                     records.forEach((e: any) => {
                         let record = e.fields;
                         if (e.id.toString() === res.toString()) {
-                    
+
                             let data = {
                                 class: el.class,
                                 student: record.Name
@@ -118,8 +125,8 @@ class Service {
                 student.push(list)
 
             });
-           //get students in classes and parse them to get students names
-            var results = student.reduce((results, val,i) => {
+            //get students in classes and parse them to get students names
+            var results = student.reduce((results, val, i) => {
                 for (let index = 0; index < val.length; index++) {
                     (results[val[index].class] = results[val[index].class] || []).push(val[index].student);
                 }

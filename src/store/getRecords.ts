@@ -27,7 +27,7 @@ export const getRecords = (name: string) => {
           error.toString();
         dispatch({
           type: ActionType.FAIL,
-          payload: resMessage
+          payload: ''
         });
 
       }
